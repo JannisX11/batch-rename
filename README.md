@@ -8,4 +8,4 @@ Rename multiple files at once inside the editor window. That way you can use fin
 * Edit the file names in the editor
 * Hit Save to confirm
 
-![Demo GIF](https://github.com/JannisX11/batch-rename/blob/master/media/demo.gif?raw=true)
+![Demo GIF](https://raw.githubusercontent.com/JannisX11/batch-rename/main/media/demo.gif)
