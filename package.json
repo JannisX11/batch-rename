@@ -2,7 +2,7 @@
   "name": "batch-rename-extension",
   "displayName": "Batch Rename",
   "description": "Batch rename files in the explorer inside a text editor",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "JannisX11",
   "repository": {
 		"type": "git",
@@ -12,12 +12,12 @@
     "vscode": "^1.34.0"
   },
   "categories": [
-    "Other",
-    "Debuggers"
+    "Other"
   ],
   "activationEvents": [
     "onCommand:extension.renameBatch"
   ],
+  "icon": "icon.png",
   "main": "./out/src/extension",
   "contributes": {
     "commands": [
