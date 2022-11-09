@@ -52,17 +52,19 @@ export function activate(context: vscode.ExtensionContext) {
                 } else {
                     vscode.window.showInformationMessage('The line count does not match the file selection!')
                 }
-                vscode.commands.executeCommand('workbench.action.closeActiveEditor')
-                fs.unlink(batchFilePath, (err) => {
-                    if (err) console.error(err);
-                })
+                setTimeout(() => {
+                    vscode.commands.executeCommand('workbench.action.closeActiveEditor');
+                    fs.unlink(batchFilePath, (err) => {
+                        if (err) console.error(err);
+                    });
+                }, 80)
             }
         })
 
     })
 
-    vscode.workspace.onDidSaveTextDocument((doc) => {
-        if (doc == current_renaming.doc) {
+    vscode.workspace.onWillSaveTextDocument((save_event) => {
+        if (save_event.document == current_renaming.doc && save_event.reason == 1) {
             current_renaming.save()
         }
     })
