@@ -2,7 +2,7 @@
   "name": "batch-rename-extension",
   "displayName": "Batch Rename",
   "description": "Batch rename files in the explorer inside a text editor",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "publisher": "JannisX11",
   "repository": {
     "type": "git",
