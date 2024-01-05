@@ -1,11 +1,10 @@
-'use strict'
 import * as vscode from 'vscode'
 const fs = require('fs')
 const PathModule = require('path')
 
 export function activate(context: vscode.ExtensionContext) {
     // Register the commands that are provided to the user
-    var current_renaming
+    var current_renaming: { files: any; doc?: any; save?: any }
 
     let disposableRenameCommand = vscode.commands.registerCommand('extension.renameBatch', (clicked_file, selected_files) => {
         if (!selected_files) return
@@ -14,14 +13,14 @@ export function activate(context: vscode.ExtensionContext) {
             files: []
         }
 
-        selected_files.forEach(file => {
+        selected_files.forEach((file: { basename: any; fsPath: string; basepath: any }) => {
             file.basename = PathModule.basename(file.fsPath)
             file.basepath = file.fsPath.split(file.basename).slice(0, -1).join(file.basename)
             current_renaming.files.push(file)
         })
 
         let batchFilePath = PathModule.join(__dirname, '.Batch Rename.txt')
-        let content = current_renaming.files.map(file => file.basename).join('\n')
+        let content = current_renaming.files.map((file: { basename: any }) => file.basename).join('\n')
         fs.writeFileSync(batchFilePath, content)
 
         var openPath = vscode.Uri.file(batchFilePath)
@@ -37,7 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
 
                 if (current_renaming.files.length == new_names.length) {
                     
-                    current_renaming.files.forEach((file, i) => {
+                    current_renaming.files.forEach((file: { basepath: string; fsPath: string }, i: number) => {
                         let num = 1;
                         let new_path = file.basepath + new_names[i];
                         if (file.fsPath == new_path) return;
@@ -54,7 +53,7 @@ export function activate(context: vscode.ExtensionContext) {
                 }
                 setTimeout(() => {
                     vscode.commands.executeCommand('workbench.action.closeActiveEditor');
-                    fs.unlink(batchFilePath, (err) => {
+                    fs.unlink(batchFilePath, (err: any) => {
                         if (err) console.error(err);
                     });
                 }, 80)
